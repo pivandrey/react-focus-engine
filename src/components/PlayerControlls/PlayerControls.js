@@ -1,21 +1,35 @@
-import {Button} from "../button/Button";
-import * as S from './PlayerControls.styles.css';
-import {withViewProps} from "../../renderer/hoc/withViewProps";
+import {Button} from "../Button/Button";
+import styles from './PlayerControls.styles.css';
 
-export const PlayerControls = withViewProps(({ viewProps }) => {
+export const settingsFocusKey = 'settings';
+export const likeFocusKey = 'like';
+export const subscribeFocusKey = 'subscribe';
+export const ownerFocusKey = 'owner';
+
+export const PlayerControls = ({ onShowMenu }) => {
     return (
-        <div className={S.wrapper}>
-            <div className={S.leftPart}>
-                <Button onClick={() => {}} content={'Like'} {...viewProps} />
-                <div className={S.gap} />
-                <Button onClick={() => {}} content={'Subscribe'} {...viewProps} />
-                <div className={S.gap} />
-                <Button onClick={() => {}} content={'Owner'} {...viewProps} />
+        <div className={'wrapper'}>
+            <div className={'leftPart'}>
+                <Button focusKey={likeFocusKey} onClick={() => {}} content={'Like'} />
+                <div className={'gap'} />
+                <Button focusKey={subscribeFocusKey} onClick={() => {}} content={'Subscribe'} />
+                <div className={'gap'} />
+                <Button
+                    focusKey={ownerFocusKey}
+                    nextFocusRight={settingsFocusKey}
+                    onClick={() => {}}
+                    content={'Owner'}
+                />
             </div>
 
-            <div className={S.rightPart}>
-                <Button onClick={() => {}} content={'settings'} {...viewProps} />
+            <div className={'rightPart'}>
+                <Button
+                    focusKey={settingsFocusKey}
+                    nextFocusLeft={ownerFocusKey}
+                    onClick={onShowMenu}
+                    content={'settings'}
+                />
             </div>
         </div>
     )
-})
+}
